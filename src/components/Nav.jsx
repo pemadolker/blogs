@@ -4,8 +4,8 @@ export default function Nav({ page, setPage }) {
   return (
     <nav className="nav">
       <button className="nav-logo" onClick={() => setPage('home')}>
-        <span className="logo-kanji">ペマ </span>
-        Wabisabi Notes
+        <span className="logo-kanji">桜</span>
+        Sakura Notes
       </button>
       <ul className="nav-links">
         <li>

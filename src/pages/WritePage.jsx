@@ -9,7 +9,7 @@ const COLORS = [
   'linear-gradient(135deg, #fdf4ff, #e9d5ff)',
 ]
 
-export default function WritePage({ initialPost, onSave, onCancel }) {
+export default function WritePage({ initialPost, onSave, onCancel, saving = false }) {
   const editing = !!initialPost
   const [title, setTitle]       = useState(initialPost?.title || '')
   const [excerpt, setExcerpt]   = useState(initialPost?.excerpt || '')

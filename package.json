@@ -1,5 +1,5 @@
 {
-  "name": "pema-notes-blog",
+  "name": "wabisabi-notes-blog",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "@supabase/supabase-js": "^2.44.4"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",
