@@ -1,59 +1,72 @@
-import { useState, useEffect } from 'react'
-
-const KEY = 'sakura_notes_v1'
-
 const SAMPLE = [
   {
     id: 1,
-    title: 'Introduction to Database Management Systems',
-    excerpt: 'ACID properties, types of databases, basic SQL queries, and ER diagrams — my notes from Unit 1 of DBMS.',
-    content: `A **Database Management System (DBMS)** is software that allows us to store, retrieve, and manage data efficiently. Instead of dumping everything into plain text files, a DBMS gives us structure, relationships, and powerful querying.
+    title: 'Unit 1: Understanding Data & the Rise of NoSQL',
+    excerpt: 'Why traditional databases struggle at scale, and how NoSQL solves it with flexibility, horizontal scaling, and distributed systems.',
+    content: `## 1. Data is the Foundation of Everything
 
-## What is a Database?
+Before even talking about databases, one thing became very clear to me — **data is everything.**
 
-A database is an organized collection of structured information stored electronically. Think of it like a super-powered spreadsheet where data is related, searchable, and consistent.
+Every system depends on data:
 
-> A DBMS is the middleman between the user and the database — it handles all the messy complexity so we don't have to.
+- Instagram → user posts, likes, comments
+- Banking apps → transactions, balances
+- College systems → student records
 
-## ACID Properties
+## 2. The Problem with Traditional Databases
 
-Transactions in a reliable DBMS follow ACID properties:
+**RDBMS** worked well for structured data and fixed schemas. But as data grew, problems appeared:
 
-- **Atomicity** — A transaction is all or nothing. If one part fails, the whole thing rolls back.
-- **Consistency** — Data must always go from one valid state to another.
-- **Isolation** — Concurrent transactions don't interfere with each other.
-- **Durability** — Once committed, data stays committed (even if the server crashes).
+- Difficult to scale for millions of users
+- Rigid table structure
+- Complex joins slow down performance
+- Not suitable for unstructured data
 
-## My Key Takeaways
+## 3. Enter NoSQL
 
-After this unit, what really clicked is that ACID isn't just a buzzword — it's what makes databases trustworthy enough to store bank transactions or hospital records.
+NoSQL = **Not Only SQL**. It doesn't mean SQL is useless — it means we need more flexible ways to handle modern data.
 
-The choice between SQL and NoSQL really comes down to your data shape and access patterns. There's no universal winner — just the right tool for the job 🌸`,
-    tags: ['DBMS', 'Databases', 'SQL'],
-    date: 'March 2025',
-    color: 'linear-gradient(135deg, #fdf0f3, #f2c4ce)',
+## 4. Key Features of NoSQL
+
+**Schema-less** — no need to define structure in advance.
+
+\`\`\`json
+{ "name": "Pema", "skills": ["C++", "Python"] }
+\`\`\`
+
+**Horizontal Scaling** — add more machines instead of upgrading one.
+
+**High Performance** — faster for large-scale reads and writes.
+
+**Distributed Systems** — data lives across multiple nodes, so if one fails, others still work.
+
+## 5. Types of NoSQL Databases
+
+- **Key-Value** — simple and fast, like a dictionary. Good for session storage.
+- **Document** — stores JSON-like data, very flexible. Most popular in web dev.
+- **Column-Family** — large-scale structured data, used in analytics.
+- **Graph** — focuses on relationships, like social networks.
+
+## 6. SQL vs NoSQL
+
+| SQL | NoSQL |
+| Structured | Flexible |
+| Fixed schema | Dynamic schema |
+| Vertical scaling | Horizontal scaling |
+| Strong consistency | Eventual consistency |
+
+My takeaway: **SQL = stability, NoSQL = scalability.**
+
+## 7. Personal Reflection
+
+What stood out to me is the mindset shift — from structured to flexible, from single systems to distributed, from small data to massive data thinking.
+
+> Data is not just stored — it is designed, managed, and scaled.`,
+    tags: ['NoSQL', 'Databases', 'Unit 1'],
+    date: 'March 2026',
+    readTime: '6 min read',
     emoji: '💻',
-    readTime: '5 min read',
+    color: 'linear-gradient(135deg, #fdf0f3, #f2c4ce)',
   },
+  // your other posts below...
 ]
-
-export function usePosts() {
-  const [posts, setPosts] = useState(() => {
-    try {
-      const raw = localStorage.getItem(KEY)
-      return raw ? JSON.parse(raw) : SAMPLE
-    } catch {
-      return SAMPLE
-    }
-  })
-
-  useEffect(() => {
-    try { localStorage.setItem(KEY, JSON.stringify(posts)) } catch {}
-  }, [posts])
-
-  const addPost    = (p) => setPosts(prev => [p, ...prev])
-  const deletePost = (id) => setPosts(prev => prev.filter(p => p.id !== id))
-  const updatePost = (updated) => setPosts(prev => prev.map(p => p.id === updated.id ? updated : p))
-
-  return { posts, addPost, deletePost, updatePost }
-}
